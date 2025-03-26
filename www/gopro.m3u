@@ -1,0 +1,3 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="gopro" tvg-name="GoPro Hero9" group-title="Cameras",GoPro Livestream
+http://<NAS-IP>:8080/hls/gopro.m3u8
