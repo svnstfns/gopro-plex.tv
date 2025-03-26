@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  gopro-streamer:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "1935:1935"     # RTMP
+      - "8080:80"       # HTTP/Web
+      - "5000:5000"     # Flask API
+    volumes:
+      - ./videos:/videos
+      - ./www:/www
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    restart: unless-stopped
+    networks:
+      gopro_net:
+        ipv4_address: 10.121.124.20
+
+networks:
+  gopro_net:
+    ipam:
+      config:
+        - subnet: 10.121.124.0/24
